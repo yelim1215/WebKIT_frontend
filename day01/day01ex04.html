@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>오징어</li>
+        <li>꼴뚜기</li>
+        <li>대구</li>
+        <li>명태</li>
+        <li>거북이</li>
+    </ul>
+
+    <script>
+        // 자바 스크립트에는 char 타입이 없다
+        // 홀따옴표와 쌍따옴표 모두 문자열로 사용된다
+
+        var colors = ['red', 'green', 'blue', 'orange', 'pink'];
+        // ul 태그 안에 li를 다시 찾아라
+        var lis = document.getElementsByTagName("ul")[0].getElementsByTagName("li");
+        console.dir(lis);
+        for (var i = 0; i < lis.length; i++) {
+            // console.log(lis[i]);
+            // 각각의 li 요소의 배경색으로 colors의 색상을 적용 시켜라
+            // lis[i].style.background = colors[i];
+            // i번째 요소를 클릭하면 colors의 i번째 색상이 적용 되도록 한다.
+            // -----
+            // 해결 방법 : 자바스크립트 객체는 캡슐화 불가
+            // 즉, 필요한 속성을 객체에 임의로 추가 가능
+            lis[i].no = i;
+            lis[i].onclick = function(event) {
+                // lis[i].style.backgroundColor = colors[i];
+                // console.log(i);
+                // this.style.backgroundColor = colors[i];
+                // event.target.style.backgroundColor = color[i];
+                console.log(this.no);
+                this.style.backgroundColor = colors[this.no];
+            }
+        }
+        // 이미 반복되었기 때문에 i의 값은 0~4까지 반복되고 5가 되었다. 그래서 콘솔 창에 계속 5가 출력 됨
+        // 그 후에 event가 발생된다
+    </script>
+</body>
+</html>

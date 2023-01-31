@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 단축 ul>li*3
+    목록 태그 circle, square, a, i -->
+    <ul type="circle" class="color">
+        <li>Red</li>
+        <li>Green</li>
+        <li>Blue</li>
+    </ul>
+    <ol type="a" class="menu">
+        <li>title01</li>
+        <li>title02</li>
+        <li>title03</li>
+    </ol>
+
+    <script>
+        // 문서 내의 모든 li요소를 선택해서 lilist가 참조 하도록 한다.
+        // getElementsByClassName의 결과는 List이다
+        var olTag = document.getElementsByClassName("menu");
+        console.log(olTag[0]);
+        var liList = olTag[0].getElementsByTagName("li");
+        console.log(liList[0]);
+        console.log(liList[1]);
+        console.log(liList[2]);
+        console.dir(liList);
+        // liList의 모든 요소에 이벤트 핸들러 한 번에 추가
+        for (var i = 0; i < liList.length; i++) {
+            console.log(liList[i]);
+            liList[i].onclick = function(event) {
+                console.log(event.target.innerText);
+            }
+        }
+
+        var ulTag = document.getElementsByClassName("color");
+        console.log(ulTag[0]);
+        var ulList = ulTag[0].getElementsByTagName("li");
+        ulList[0].onclick = function(event) {
+            console.log(event.target.innerText);
+            document.background = "red";
+        }
+        ulList[1].onclick = function(event) {
+            console.log(event.target.innerText);
+            document.background = "green";
+        }
+        ulList[2].onclick = function(event) {
+            console.log(event.target.innerText);
+            document.background = "blue";
+        }
+    </script>
+</body>
+</html>

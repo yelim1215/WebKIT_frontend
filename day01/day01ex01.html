@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: yellow;
+        }
+
+        #heading {
+            color: #ff0;
+            background-color: #f00;
+        }
+
+        .welcome {
+            color: orange;
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <!-- id랑 class style 차이 알기 위에 참고 (id : #, class : .) -->
+    <h1 id="heading">Hello world</h1>
+    <h3 class="welcome">오신것을 환영합니다.</h3>
+    <h3>반갑습니다.</h3>
+    <!-- body > h3.welcome -->
+
+    <script>
+        // DOM - Document Object Model (문서 객체 모델)
+        // DOM이 없으면 위의 h1을 여기서 접근할 수 없다
+        var h1Tag = document.getElementById("heading");
+        console.log(h1Tag);
+        console.dir(h1Tag);
+    </script>
+</body>
+</html>
