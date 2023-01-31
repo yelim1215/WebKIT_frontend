@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #form1 input[type=text], #form1 textarea {
+            border: none;
+            border-bottom: 4px solid blue;
+            background-color: skyblue;
+            width: 400px;
+        }
+    </style>
+    <script>
+        // var 또는 function으로 선언하면 최 상위 window의 멤버로 잡힌다.
+        function validateForm(form) { 
+            // form의 기본은 페이지 전환.
+            // 이벤트의 기본 기능을 일시 중지할 수 있다.
+            // 이벤트는 이벤트 핸들러 함수에서 자동 생성된다.
+            // event.preventDefalut(); // 일시 정지
+            // 이벤트 핸들러가 아니다. this == window
+            if (form.subject.value == "") {
+                alert("제목을 입력 하세요.");
+                form.subject.focus();
+                return false;
+            }
+            if (form.writer.value == "") {
+                alert("글쓴이를 입력 하세요.");
+                form.subject.focus();
+                return false;
+            }
+            if (form.writer.value.length < 2) {
+                alert("글쓴이 이름은 2자 이상 입력 하세요.");
+                form.subject.focus();
+                return false;
+            }
+
+            form.action = "https://www.naver.com";
+            form.submit();
+        }
+        console.dir(window);
+    </script>
+</head>
+<body>
+    <h1>글쓰기</h1>
+    <form action="" id="form1" onsubmit="javascipt:validateForm(this)">
+        <table>
+            <tr>
+                <th>제목</th>
+                <td><input type="text" name="subject"></td>
+            </tr>
+            <tr>
+                <th>이름</th>
+                <td><input type="text" name="writer"></td>
+            </tr>
+            <tr>
+                <th>내용</th>
+                <td><textarea name="content" id="" cols="30" rows="10"></textarea></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="저장"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
