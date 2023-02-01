@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function testFn01() {
+            console.log("testFn01()에서 this : ", this);
+        }
+
+        // 함수는 호출해야 실행한다.
+        testFn01();
+
+        var obj = {
+            name : "my object",
+            objFn : function() {
+                console.log("objFn에서 this는 : ", this); // 이 this가 누구의 this냐가 중요하다
+            }
+        }
+
+        // obj.objFn();
+        // obj['objFn']();
+
+        // window의 멤버 필드로 접근
+        window['testFn01']();
+        window['obj']['objFn']();
+    </script>
+</body>
+</html>
