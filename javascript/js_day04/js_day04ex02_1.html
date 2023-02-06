@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        String.prototype.kkk = function() {
+            console.log("나는 kkk함수!", this.toString());
+        }
+
+        // String 클래스의 prototype에 equals 함수 추가
+        String.prototype.equals = function(str) {
+            // console.log(this);
+            // console.log(str);
+
+            return this.toString() == str.toString();
+        }
+
+        // prototype 을 위한 class 객체 활용
+        "Hello World".kkk();
+        var str = "Hi School";
+        str.kkk();
+        var nation = new String("Korea");
+        nation.kkk();
+        var a = "korea";
+        console.log(typeof a, typeof nation);
+        console.log(nation === a);
+
+        console.log(a.equalse(nation));
+    </script>
+</body>
+</html>
