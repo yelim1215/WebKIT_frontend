@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        if (true) {
+            // 블럭 안에서 선언했기 때문에 window의 멤버가 된다
+            var a = 200;
+        }
+
+        function bbb() {
+            // 함수 내부에서만 적용
+            var b = "hello";
+            // var 쓰지 않으면 window의 필드
+            c = "world";
+        }
+        bbb();
+
+        // var는 함수 단위이기 때문에 블럭 안에서 선언한 변수를 외부에서 접근 가능
+        console.log(a);
+        console.dir(window);
+    </script>
+
+</body>
+</html>
