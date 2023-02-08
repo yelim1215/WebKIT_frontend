@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jqueryDay01Ex01_2.html</title>
+</head>
+<body>
+    <div id="btns">
+        <button id="redBtn">Red</button>
+        <button id="greenBtn">Green</button>
+        <button id="blueBtn">Blue</button>
+    </div>
+
+    <script>
+        var redBtn = document.getElementById("redBtn");
+        var greenBtn = document.getElementById("greenBtn");
+        var blueBtn = document.getElementById("blueBtn");
+
+        redBtn.onclick = function() {
+            document.body.style.backgroundColor = "red";
+        }
+        greenBtn.onclick = function() {
+            document.body.style.backgroundColor = "green";
+        }
+        blueBtn.onclick = function() {
+            document.body.style.backgroundColor = "blue";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- jQuery CDN -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script>
+        // console.dir( $(document) );
+        // console.dir( document );
+
+        // jQuery의 진입점
+        $(document).ready( function() {
+
+        });
+
+        $(document).ready(function() {
+            // 방법 1 : jQuery
+            $("#clickBtn").on("click", function(event) {
+                alert("Hello")
+            });
+
+            // 방법 2 : js
+            // document.getElementById("clickBtn").addEventListener("click", function(event) {
+            //     alert("Hello 2");
+            // })
+        });
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

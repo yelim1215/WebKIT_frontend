@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jqueryDay01Ex01_2.html</title>
+    <script></script>
+</head>
+<body>
+    <div id="btns">
+        <button id="redBtn">Red</button>
+        <button id="greenBtn">Green</button>
+        <button id="blueBtn">Blue</button>
+    </div>
+
+    <script>
+        // 방법 1 : js
+        // var btns = document.getElementById("btns").getElementsByTagName("button");
+        // for (var btn of btns) {
+        //     redBtn.onclick = function() {
+        //     document.body.style.backgroundColor = this.innerText;
+        //     }
+        // };
+
+        // 방법 2 : jquery
+        // List 형태의 여러 요소에 한 번에 이벤트를 적용
+        $("btns > button").click(function(event) {
+            // $() DOM 객체를 인자로 넣어주면 바로 jQuery 객체로 바뀐다
+            $("body").css("backgroundColor", $(this).text()); // this는 DOM
+        });
+
+        // jquery 장점
+        // 1. 제이쿼리는 주요 웹 브라우저의 구버전을 포함한 대부분의 브라우저에서 지원됩니다.
+        // 2. HTML DOM을 손쉽게 조작할 수 있으며, CSS 스타일도 간단히 적용할 수 있습니다.
+        // 3. 애니메이션 효과나 대화형 처리를 간단하게 적용해 줍니다.
+        // 4. 같은 동작을 하는 프로그램을 더욱 짧은 코드로 구현할 수 있습니다.
+        // 5. 다양한 플러그인과 참고할 수 있는 문서가 많이 존재합니다.
+        // 6. 오픈 라이선스를 적용하여 누구나 자유롭게 사용할 수 있습니다.
+    </script>
+</body>
+</html>
