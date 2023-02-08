@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jsDAy05Ex02_2</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js" integrity="sha512-2V49R8ndaagCOnwmj8QnbT1Gz/rie17UouD9Re5WxbzRVUGoftCu5IuqqtAM9+UC3fwfHCSJR1hkzNQh/2wdtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <h1>jsDAy05Ex02_2</h1>
+    <div id="demo">
+        Ajax기술로 saram_data.json파일의 내용을 로드한다.
+    </div>
+    <p><button id="loadBtn">Laod Button</button></p>
+
+    <script>
+        var demo = document.getElementById("demo");
+        var loadBtn = document.getElementById("loadBtn");
+
+        loadBtn.addEventListener("click", (event)=>{
+            const xhr = new XMLHttpRequest();
+            xhr.onload = (event) => {
+                let saramList = JSON.parse(xhr.responseText)["saramList"];
+                console.log(saramList);
+            };
+            xhr.open("GET", "http://localhost:3000/js/saram_data.json", true);
+            xhr.send();
+        });
+    </script>
+</body>
+</html>
