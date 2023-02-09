@@ -17,6 +17,9 @@ app.set("views", __dirname + "/template");
 
 app.use(cors());
 app.use(express.static(__dirname + "/public"));
+// express의 bodyParser 미들웨어 설정 - POST요청 방식에서 파라미터를 받기 위해.
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 
 app.get("/", (req, res)=>{
@@ -25,40 +28,69 @@ app.get("/", (req, res)=>{
     res.end();
 });
 
+// 목록
+var carList = [];
+for(var i=0; i<10; i++) {
+    carList.push({no:i, name:"car name "+i, price: (1+i)*1000, year:2008+i, company:"company"+i});
+}
+let no = 10;
+// GET 요청 처리 - SELECT 기능
+app.get("/car", (req, res)=>{
+    console.log("GET - /car");
+    res.send(carList);
+});
 
-app.post("/saram/input", (req, res) => {
+// POST 요청 처리 - INSERT 기능
+// post요청에서 파라미터를 받기위해서는 body-parser 미들웨어 필요.
+// 테스트는 Post Man으로 하면 된다.
+app.post("/car", (req, res)=>{
+    console.log("POST - /car");
+    let carObj = req.body;
+    carObj.no = no++;
+    carList.push(carObj);
+    res.send(carList);
+});
+
+// 수정기능
+app.post("/car/modify", (req, res)=>{
+    console.log("POST - /car/modify")
+
+    res.send(carList);
+});
+
+// 삭제기능
+app.post("/car/delete", (req, res)=>{
+    console.log("POST - /car/delete")
+
+    res.send(carList);
+});
+
+app.post("/saram/input", (req, res)=>{
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
-        console.log(">>>>>> (1) ");
-        res.writeHead(200, {"Content-Type":"text/html; charset=UTF-8"});
-        res.write("<h2>upload file received!</h2>");
-        res.end();
+        console.log(">>>>>> (1) ", fields);
     });
-    form.on("end", function() {
-        console.log(">>>>>> (2) "); // _2
-        console.log("파일 개수 : ", this.openedFiles.length);
-        // openedFiles s가 붙어있다는건 여러개
-        // 하나일 때는 photo로 접근
-        for (var i = 0; i < this.openedFiles.length; i++) {
+
+    form.on("end",  function () {
+        console.log(">>>>>> (2) ");
+        console.log("파일 갯수 : ", this.openedFiles.length);
+        for(var i=0; i<this.openedFiles.length; i++) {
             let file = this.openedFiles[i];
-            // console.dir(file);
+           //console.dir(file);
             var oldpath = file.filepath;
-            var newpath = 'C:/Users/qowls/Downloads/upload/' + file.originalFilename;
-            // rename을 이용해서 파일을 옮긴다
-            // 그 다음 callback 함수 실행되고 완료문
+            var newpath = 'C:/Users/User/upload/' + file.originalFilename;
             fs.rename(oldpath, newpath, function (err) {
                 if (err) throw err;
-                // 위에서 res.write랑 res.end 둘 다 했으니 여기서는 안함
-                // res.write('File uploaded and moved!');
-                // res.end();
-
-                res.writeHead(200, {"Content-Type":"text/html; charset=UTF-8"}); // _2
-                res.write("<h2>upload file received!</h2>"); // _2
-                res.end(); // _2
-            });            
+                res.writeHead(200, {"Content-Type":"text/html; charset=UTF-8"});
+                res.write("<h2>upload file received!</h2>");
+                res.end();
+            });
         }
     });
 });
+
+
+
 
 // http와 express의 결합 - 같은 port를 공유한다.
 const server = http.createServer(app);

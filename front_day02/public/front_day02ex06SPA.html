@@ -15,6 +15,8 @@
                 <th>PRICE</th>
                 <th>COMPANY</th>
                 <th>YEAR</th>
+                <th>수정</th>
+                <th>삭제</th>
             </tr>
 <%
         for(var car of carList) {
@@ -25,6 +27,8 @@
                 <td><%=car.price %></td>
                 <td><%=car.company %></td>
                 <td><%=car.year %></td>
+                <td><button class="modifyBtn" data-no="<%=car.no %>">수정</button></td>
+                <td><button class="delBtn" data-no="<%=car.no %>">삭제</button></td>
             </tr>
 <%  
         } // end of for
@@ -34,27 +38,28 @@
 </head>
 <body>
     <h1>중고 차 매매 쇼핑몰</h1>
-    <form id="carForm" method="post">
+        <form id="carForm">
         <table>
+            <caption>중고 차 정보 입력</caption>
             <tr>
                 <th>차종</th>
-                <td><input type="text" name="name" value="" /></td>
+                <td><input type="text" name="name" value="SORENTO" /></td>
             </tr>
             <tr>
                 <th>가격</th>
-                <td><input type="text" name="price" value="" /></td>
+                <td><input type="text" name="price" value="4500" /></td>
             </tr>
             <tr>
                 <th>회사</th>
-                <td><input type="text" name="company" value="" /></td>
+                <td><input type="text" name="company" value="KIA" /></td>
             </tr>
             <tr>
                 <th>연식</th>
-                <td><input type="text" name="year" value="" /></td>
+                <td><input type="text" name="year" value="2023" /></td>
             </tr>
             <tr>
-                <th></th>
-                <td><input type="SUBMIT" value="저장" /></td>
+                <th> </th>
+                <td><input type="submit" value="저장" /></td>
             </tr>
         </table>
     </form>
@@ -62,30 +67,40 @@
 
     <script>
         function drawList(carList) {
-            $.get("/car", function(data, status, xhr){
-                if(status === 'success'){
-                    var carList = data;
-                    var complie = _.template($("#carListTmp").html());
-                    var html = complie({carList});
-                    $("#carListBox").html(html);
-                }
+            var complie = _.template($("#carListTmp").html());
+            var html = complie({carList});
+            $("#carListBox").html(html);
+
+            $("button.modifyBtn").click(function() {
+                console.log("modify no => ", $(this).data("no"));
+
+            });
+
+            $("button.delBtn").on("click", function() {
+                console.log("del no => ", $(this).data("no"));
+                
             });
         }
+
         $(document).ready(function() {
-            $.get("/car", function(data, status, xhr) {
-                if (status === 'success') {
+            $.get("/car", function(data, status, xhr){
+                if(status === 'success'){
                     drawList(data);
                 }
             });
-            $("#carForm").on("submit", function(event) {
+
+            $("#carForm").on("submit", function(event){
                 event.preventDefault();
                 var paramData = {
-                    name : $(this).val(),
+                    name : $(this.name).val(), //this.name.value
+                    price : $(this.price).val(),
+                    company : $(this.company).val(),
+                    year : $(this.year).val()
                 }
                 console.log(paramData);
-                // $.post("/car", paramData, function(data, status, xhr) {
-                //     drawList(data);
-                // });
+                $.post("/car", paramData, function(data, status, xhr){
+                    drawList(data);
+                });
             });
         });
     </script>
