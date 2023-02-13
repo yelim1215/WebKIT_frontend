@@ -1,0 +1,5 @@
+/* input 태그 중에 disabled가 있다면 */
+input[disabled] {
+    border: 1px;
+    background-color: white;
+} 
